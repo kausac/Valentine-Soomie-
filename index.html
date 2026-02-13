@@ -10,68 +10,87 @@ body{
   margin:0;
   padding:0;
   font-family:'Comic Sans MS', cursive;
-  background: linear-gradient(135deg,#ffe3f1,#fff0e6);
+  background:linear-gradient(135deg,#ffe3f1,#fff0e6);
   overflow:hidden;
   text-align:center;
   color:#ff2e63;
 }
 
+/* Heading */
 h1{
-  margin-top:50px;
-  font-size:6vw;
+  margin-top:40px;
+  font-size:7vw;
   text-shadow:2px 2px 8px #ffcce6;
 }
 
+/* Typing */
 #typingText{
   font-size:5vw;
   margin-top:20px;
   min-height:50px;
 }
 
+/* Love meter */
 #loveMeter{
   font-size:10vw;
-  margin:20px;
+  margin:15px;
 }
 
+/* Buttons */
 button{
   background:#ff5bb5;
   border:none;
-  padding:15px 30px;
+  padding:14px 28px;
   border-radius:50px;
   color:white;
-  font-size:4vw;
+  font-size:5vw;
   margin:10px;
   box-shadow:0 8px 15px rgba(255,0,100,0.3);
   transition:0.3s;
+  position:relative;
 }
 
 button:hover{
   transform:scale(1.1);
 }
 
-.heart{
+/* Floating emojis */
+.floating{
   position:absolute;
+  font-size:6vw;
+  animation:floatUp 8s linear infinite;
+  opacity:0.8;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-10vh)}
+}
+
+/* Cursor heart trail */
+.cursorHeart{
+  position:absolute;
+  pointer-events:none;
   font-size:5vw;
-  animation:float 6s infinite;
+  animation:fadeUp 1s forwards;
 }
 
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-30px)}
+@keyframes fadeUp{
+  from{opacity:1; transform:translateY(0)}
+  to{opacity:0; transform:translateY(-40px)}
 }
 
-/* ===== POPUP ===== */
-
+/* POPUP */
 #popupMessage{
   display:none;
   position:fixed;
   top:0;left:0;
   width:100%;height:100%;
-  background:rgba(255,192,203,0.95);
+  background:rgba(255,192,203,0.97);
   z-index:9999;
-  padding:40px 20px;
   overflow:auto;
-  animation:fadeIn 1s ease forwards;
+  text-align:center;
+  animation:fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn{
@@ -80,13 +99,8 @@ button:hover{
 }
 
 .popupContent{
-  margin-top:10vh;
-  animation:popUp 0.8s ease;
-}
-
-@keyframes popUp{
-  from{transform:scale(0.7);opacity:0}
-  to{transform:scale(1);opacity:1}
+  margin-top:12vh;
+  padding:20px;
 }
 
 .popupContent h2{
@@ -96,7 +110,6 @@ button:hover{
 .popupNote{
   font-size:5vw;
   margin:20px 0;
-  color:#c9184a;
 }
 
 .popupGif{
@@ -114,7 +127,7 @@ button:hover{
 <div id="typingText"></div>
 <div id="loveMeter">💗💗💗💗💗</div>
 
-<button onclick="showPopup()">Yes 😍</button>
+<button id="yesBtn" onclick="showPopup()">Yes 😍</button>
 <button id="noBtn">No 😅</button>
 
 <div id="popupMessage">
@@ -122,12 +135,12 @@ button:hover{
     <h2>💞 I Love You, Sooomie! 💞</h2>
 
     <div class="popupNote">
-      Every moment with you feels like my favorite song playing on repeat.  
-      You are my comfort, my happiness, my forever person.  
-      I choose you today, tomorrow, and every heartbeat after that. 💖
+      Every moment with you feels like magic written into my life.  
+      You are my peace, my happiness, and my forever choice.  
+      I will always choose you. 💖
     </div>
 
-    <img class="popupGif" 
+    <img class="popupGif"
     src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
 
     <div class="popupNote">
@@ -138,30 +151,66 @@ button:hover{
 </div>
 
 <script>
+
+/* Typing Effect */
 const text="Sooomie, will you be my Valentine? ❤️";
 let i=0;
 function typeWriter(){
   if(i<text.length){
     document.getElementById("typingText").innerHTML+=text.charAt(i);
     i++;
-    setTimeout(typeWriter,80);
+    setTimeout(typeWriter,70);
   }
 }
 window.onload=typeWriter;
 
-// Runaway No button
+/* Floating Cute Emojis */
+const emojis=["💖","💘","💕","🌸","✨"];
+for(let j=0;j<20;j++){
+  const e=document.createElement("div");
+  e.className="floating";
+  e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(5+Math.random()*5)+"s";
+  e.style.fontSize=(4+Math.random()*4)+"vw";
+  document.body.appendChild(e);
+}
+
+/* Cursor heart trail (works on mobile too) */
+document.addEventListener("mousemove",createHeart);
+document.addEventListener("touchmove",function(e){
+  createHeart(e.touches[0]);
+});
+
+function createHeart(e){
+  const heart=document.createElement("div");
+  heart.className="cursorHeart";
+  heart.innerText="💗";
+  heart.style.left=e.pageX+"px";
+  heart.style.top=e.pageY+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),1000);
+}
+
+/* Proper runaway NO button (mobile safe) */
 const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseenter",()=>{
-  const x=Math.random()*(window.innerWidth-noBtn.offsetWidth);
-  const y=Math.random()*(window.innerHeight-noBtn.offsetHeight);
+
+function moveNo(){
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-100);
   noBtn.style.position="absolute";
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
-});
+}
 
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+
+/* Popup */
 function showPopup(){
   document.getElementById("popupMessage").style.display="block";
 }
+
 </script>
 
 </body>
