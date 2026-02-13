@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,85 +6,134 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 For Sooomie 💖</title>
 <style>
-  body {
-    margin:0;
-    padding:0;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    background: linear-gradient(135deg, #ffe3f1 0%, #fff8e6 100%);
-    overflow: hidden;
-    text-align: center;
-    cursor: none;
-  }
+/* ===== Body & Background ===== */
+body {
+  margin:0;
+  padding:0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #ffe3f1 0%, #fff0e6 100%);
+  overflow: hidden;
+  text-align: center;
+  cursor: none;
+  color: #ff1144;
+}
 
-  h1 {
-    margin-top: 50px;
-    font-size: 6vw;
-    color: #ff3366;
-    animation: pop 0.6s ease-in-out;
-  }
+/* ===== Header ===== */
+h1 {
+  margin-top: 50px;
+  font-size: 6vw;
+  color: #ff3366;
+  text-shadow: 2px 2px 5px #ffaacc;
+  animation: pop 0.6s ease-in-out;
+}
 
-  @keyframes pop { 0% {transform: scale(0);} 100% {transform: scale(1);} }
+@keyframes pop {
+  0% {transform: scale(0);}
+  100% {transform: scale(1);}
+}
 
-  .confetti-piece {
-    position: absolute;
-    width: 3vw;
-    height: 3vw;
-    opacity: 0.8;
-    animation: fall 5s linear infinite;
-  }
+/* ===== Buttons ===== */
+#buttons {
+  margin-top: 5vh;
+}
 
-  @keyframes fall { 0% { transform: translateY(-100px) rotate(0deg);} 100% { transform: translateY(100vh) rotate(360deg);} }
+button {
+  background: #ff5bb5;
+  border: none;
+  padding: 2vh 6vw;
+  border-radius: 50px;
+  color: white;
+  font-size: 4vw;
+  cursor: pointer;
+  margin: 2vw;
+  transition: 0.3s ease;
+  position: relative;
+  box-shadow: 0 8px 15px rgba(255,0,100,0.3);
+}
 
-  .heart {
-    position: absolute;
-    font-size: 5vw;
-    animation: float 6s ease-in-out infinite;
-    color: #ff5577;
-  }
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 20px rgba(255,0,100,0.5);
+}
 
-  @keyframes float { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-5vh);} }
+/* ===== Love Meter ===== */
+#loveMeter {
+  font-size: 10vw;
+  margin-top: 3vh;
+}
 
-  #buttons { margin-top: 5vh; }
+/* ===== Notes ===== */
+.note {
+  display: none;
+  font-size: 4vw;
+  margin-top: 2vh;
+  color: #d12a6a;
+  text-shadow: 1px 1px 2px #fff0ff;
+}
 
-  button {
-    background: #ff5bb5;
-    border: none;
-    padding: 2vh 5vw;
-    border-radius: 50px;
-    color: white;
-    font-size: 4vw;
-    cursor: pointer;
-    margin: 2vw;
-    transition: 0.3s ease;
-    position: relative;
-  }
+/* ===== Typing Text ===== */
+#typingText {
+  margin-top: 4vh;
+  font-size: 5vw;
+  min-height: 7vh;
+  color: #ff3366;
+  text-shadow: 1px 1px 2px #fff0ff;
+}
 
-  #loveMeter { font-size: 10vw; margin-top: 3vh; color: #ff2244; }
-  .note { display: none; font-size: 4vw; margin-top: 2vh; color: #d12a6a; }
-  #typingText { margin-top: 4vh; font-size: 5vw; color: #ff3366; min-height: 7vh; }
+/* ===== Hearts & Confetti ===== */
+.heart {
+  position: absolute;
+  font-size: 5vw;
+  animation: float 6s ease-in-out infinite;
+  color: #ff5577;
+}
 
-  .cursorHeart {
-    position: absolute;
-    pointer-events: none;
-    font-size: 5vw;
-    opacity: 0.9;
-    transform: translate(-50%, -50%);
-    animation: floatCursor 1s linear forwards;
-  }
+@keyframes float {
+  0%,100% { transform: translateY(0);}
+  50% { transform: translateY(-5vh);}
+}
 
-  @keyframes floatCursor { 0% {opacity:1; transform:translate(-50%, -50%) scale(1);} 100% {opacity:0; transform:translate(-50%, -150%) scale(1.5);} }
+.confetti-piece {
+  position: absolute;
+  width: 3vw;
+  height: 3vw;
+  opacity: 0.8;
+  animation: fall 5s linear infinite;
+}
 
-  #popupMessage {
-    display: none;
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(255,200,230,0.95);
-    z-index: 9999;
-    text-align:center;
-    font-size: 8vw;
-    color:#ff1144;
-    padding-top: 35vh;
-  }
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg);}
+  100% { transform: translateY(100vh) rotate(360deg);}
+}
+
+/* ===== Cursor Hearts ===== */
+.cursorHeart {
+  position: absolute;
+  pointer-events: none;
+  font-size: 5vw;
+  opacity: 0.9;
+  transform: translate(-50%, -50%);
+  animation: floatCursor 1s linear forwards;
+}
+
+@keyframes floatCursor {
+  0% {opacity:1; transform:translate(-50%, -50%) scale(1);}
+  100% {opacity:0; transform:translate(-50%, -150%) scale(1.5);}
+}
+
+/* ===== Popup ===== */
+#popupMessage {
+  display: none;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(255,200,230,0.95);
+  z-index: 9999;
+  text-align:center;
+  font-size: 8vw;
+  color:#ff1144;
+  padding-top: 35vh;
+  text-shadow: 2px 2px 5px #ffaacc;
+}
 </style>
 </head>
 <body>
@@ -104,7 +154,7 @@
 <div id="popupMessage">💖 Thank You, Sooomie! You’re My Forever 💖</div>
 
 <script>
-// Floating hearts
+// ===== Floating hearts =====
 const heartCount = 15;
 for(let i=0; i<heartCount; i++){
   const heart = document.createElement("div");
@@ -115,7 +165,7 @@ for(let i=0; i<heartCount; i++){
   document.body.appendChild(heart);
 }
 
-// Confetti
+// ===== Confetti =====
 const colors = ["#ff79c6", "#ff5bb5", "#ffddf4", "#fe7f9c"];
 for(let i=0; i<50; i++){
   const c = document.createElement("div");
@@ -126,7 +176,7 @@ for(let i=0; i<50; i++){
   document.body.appendChild(c);
 }
 
-// Love meter
+// ===== Love meter =====
 let loveCount = 5;
 function fillLove(){
   if(loveCount < 10) loveCount++;
@@ -136,7 +186,7 @@ function fillLove(){
   document.getElementById(random).style.display = "block";
 }
 
-// Typing effect
+// ===== Typing effect =====
 const text = "Sooomie, will you be my Valentine? ❤️";
 let index = 0;
 function typeWriter() {
@@ -148,7 +198,7 @@ function typeWriter() {
 }
 window.onload = typeWriter;
 
-// Runaway No button
+// ===== Runaway No button =====
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseenter", () => {
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -161,7 +211,7 @@ noBtn.addEventListener("mouseenter", () => {
   yesBtn.style.fontSize = (currentSize + 1.5) + "px";
 });
 
-// Cursor-follow hearts
+// ===== Cursor-follow hearts =====
 document.addEventListener("mousemove", function(e){
   const heart = document.createElement("div");
   heart.className = "cursorHeart";
@@ -172,10 +222,11 @@ document.addEventListener("mousemove", function(e){
   setTimeout(()=>{heart.remove()}, 1000);
 });
 
-// Popup message on Yes
+// ===== Popup animation =====
 function showPopup(){
   const popup = document.getElementById("popupMessage");
   popup.style.display = "block";
+
   for(let i=0;i<50;i++){
     const h = document.createElement("div");
     h.className="cursorHeart";
@@ -186,6 +237,7 @@ function showPopup(){
     document.body.appendChild(h);
     setTimeout(()=>{h.remove()},2000);
   }
+
   setTimeout(()=>{popup.innerText="💞 I Love You, Sooomie! 💞"},1500);
 }
 </script>
